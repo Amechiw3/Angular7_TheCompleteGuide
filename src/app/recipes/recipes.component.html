@@ -1,8 +1,16 @@
 <div class="row">
-  <div class="col-md-6">
-    <app-recipe-list></app-recipe-list>
+  <div class="col-md-5">
+    <app-recipe-list (recipeWasSelected)="selectedRecipe = $event"></app-recipe-list>
   </div>
-  <div class="col-md-6">
-    <app-recipe-detail></app-recipe-detail>
+  <div class="col-md-7">
+    <app-recipe-detail *ngIf="selectedRecipe; else infoText" [recipe]="selectedRecipe"></app-recipe-detail>
+    <ng-template #infoText>
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading text-center">Please select a Recipe</h4>
+      </div>
+    </ng-template>
   </div>
 </div>
